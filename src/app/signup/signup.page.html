@@ -1,0 +1,88 @@
+<ion-header class="ion-no-border ion-align-items-center">
+  <ion-row color="primary" class="ion-align-items-center">
+    <ion-col size-md="3" size-lg="3" size-xs="3">
+    </ion-col>
+    <ion-col size-md="6" size-lg="6" size-xs="6" class="ion-text-center ion-align-items-center">
+      <ion-title>Signup</ion-title>
+    </ion-col>
+    <ion-col size-md="3" size-lg="3" size-xs="3" class="ion-align-items-center">
+    </ion-col>
+  </ion-row>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <form [formGroup]="SignupForm" (ngSubmit)="submitForm()" novalidate>
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12" class="registration-page-form">
+          <div padding>
+            <div class="from-group hospitalization-radio">
+              <ion-label>Gender</ion-label>
+              <ion-radio-group value="custom-checked" formControlName="gender">
+                <div class="radio-custom">
+                  <ion-radio value="male"></ion-radio> Male
+                </div>
+                <div class="radio-custom">
+                  <ion-radio value="female"></ion-radio> Female
+                </div>
+              </ion-radio-group>
+            </div>
+            <span class="error ion-padding"
+              *ngIf="isSubmitted && errorControlDoctors['gender'].errors?.['required']">Gender is required. </span>
+            <ion-item lines="full">
+              <ion-input formControlName="firstname" type="text" placeholder="First Name"></ion-input>
+            </ion-item>
+            <span class="error ion-padding"
+              *ngIf="isSubmitted && errorControlDoctors['firstname'].errors?.['required']"> First Name is required.
+            </span>
+            <span class="error ion-padding"
+              *ngIf="isSubmitted && errorControlDoctors['firstname'].errors?.['minlength']"> First Name should be min 2
+              chars long. </span>
+            <ion-item lines="full">
+              <ion-input formControlName="lastname" type="text" placeholder="Last Name"></ion-input>
+            </ion-item>
+            <span class="error ion-padding" *ngIf="isSubmitted && errorControlDoctors['lastname'].errors?.['required']">
+              Last Name is required. </span>
+            <span class="error ion-padding"
+              *ngIf="isSubmitted && errorControlDoctors['lastname'].errors?.['minlength']"> Last Name should be min 2
+              chars long. </span>
+            <ion-item lines="full">
+              <ion-input formControlName="email" type="email" placeholder="Email"></ion-input>
+            </ion-item>
+            <span class="error ion-padding" *ngIf="isSubmitted && errorControlDoctors['email'].errors?.['required']">
+              Email is required. </span>
+            <span class="error ion-padding" *ngIf="isSubmitted && errorControlDoctors['email'].errors?.['pattern']">
+              Please provide valid email id. </span>
+            <ion-item>
+              <ion-input name="password" formControlName="password" [type]="passwordType"
+                placeholder="Enter Your Password" required></ion-input>
+              <ion-icon *ngIf="show" name="eye" color="gray" item-end (click)="togglePassword()"></ion-icon>
+              <ion-icon *ngIf="!show" name="eye-off" color="gray" item-end (click)="togglePassword()"></ion-icon>
+            </ion-item>
+            <span class="error ion-padding" *ngIf="isSubmitted && errorControlDoctors['password'].errors?.['required']">
+              Password is required. </span>
+            <span class="error ion-padding"
+              *ngIf="isSubmitted && errorControlDoctors['password'].errors?.['minlength']"> The password must be at
+              least 8 characters. </span>
+            <span class="error ion-padding" *ngIf="isSubmitted && errorControlDoctors['password'].errors?.['pattern']">
+              Please Enter One Upper Case and One Lower Case, One Spacial Characters and One Number. </span>
+            <ion-item>
+              <ion-input name="password" formControlName="confirm_password" [type]="passwordType"
+                placeholder="Enter Confirm Password" required></ion-input>
+              <ion-icon *ngIf="show" name="eye" color="gray" item-end (click)="togglePassword()"></ion-icon>
+              <ion-icon *ngIf="!show" name="eye-off" color="gray" item-end (click)="togglePassword()"></ion-icon>
+            </ion-item>
+            <span class="error ion-padding"
+              *ngIf="isSubmitted && errorControlDoctors['confirm_password'].errors?.['required']"> Confirm Password is
+              required. </span>
+            <span class="error ion-padding" *ngIf="isSubmitted && SignupForm.errors?.['passwordMismatchError']">
+              Password and confirm password should be same. </span>
+            <span class="error ion-padding" *ngIf="error">{{error}}</span>
+          </div>
+          <div padding>
+            <ion-button size="large" type="submit" expand="block">Sign up</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
